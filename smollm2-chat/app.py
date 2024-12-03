@@ -1,6 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import gradio as gr
+import os
 
 # Load tokenizer and model
 model_id = "HuggingFaceTB/SmolLM2-135M"
@@ -56,4 +57,12 @@ demo = gr.Interface(
 )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0")
+    # Get port from environment variable (for Cloud Run)
+    port = int(os.environ.get("PORT", 7860))
+    
+    # Launch with Cloud Run settings
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=port,
+        share=False
+    )
