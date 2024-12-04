@@ -1,30 +1,20 @@
+# Use the official lightweight Python image
 FROM python:3.9-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies and cleanup in a single layer
-RUN apt-get update --allow-insecure-repositories && \
-    mkdir -p /var/cache/apt/archives/partial && \
-    apt-get clean && \
-    apt-get install -y --allow-unauthenticated --no-install-recommends git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/apt/archives/*
+# Copy the requirements file into the container
+COPY requirements.txt requirements.txt
 
-# Copy only requirements first to leverage Docker cache
-COPY requirements.txt .
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install CPU-only PyTorch and other dependencies
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+# Copy the application code into the container
 COPY . .
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
-ENV PORT=8080
+# Expose port 8080 for Cloud Run
+EXPOSE 8080
 
 # Command to run the application
 CMD ["python", "app.py"]

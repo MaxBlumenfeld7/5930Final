@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import gradio as gr
 
 # Load tokenizer and model
-model_id = "HuggingFaceTB/SmolLM2-135M"
+model_id = "HuggingFaceTB/SmolLM2-135M-instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForCausalLM.from_pretrained(model_id)
 
