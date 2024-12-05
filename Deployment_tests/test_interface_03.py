@@ -1,4 +1,3 @@
-#Create interface with two models side by side
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import gradio as gr
@@ -34,7 +33,8 @@ def generate_response(model, tokenizer, message, temperature=0.7, max_length=200
             temperature=temperature,
             top_k=50,
             top_p=0.95,
-            num_return_sequences=1
+            num_return_sequences=1,
+            pad_token_id=tokenizer.eos_token_id  # Add padding token
         )
         
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -45,11 +45,11 @@ def generate_response(model, tokenizer, message, temperature=0.7, max_length=200
         except:
             pass
     else:
-        response = response[len(message):].strip()
+        response = response[len(full_prompt):].strip()
         
     return response
 
-def chat(message, temperature=0.7, max_length=200, system_prompt=""):
+def chat(message, temperature, max_length, system_prompt):
     # Generate responses from both models
     base_response = generate_response(
         base_model, 
@@ -71,10 +71,7 @@ def chat(message, temperature=0.7, max_length=200, system_prompt=""):
         is_instruct=True
     )
     
-    return {
-        base_output: base_response,
-        instruct_output: instruct_response
-    }
+    return base_response, instruct_response
 
 # Create Gradio interface
 with gr.Blocks() as demo:
@@ -111,7 +108,7 @@ with gr.Blocks() as demo:
             base_output = gr.Textbox(label="Base Model (SmolLM2-135M)", lines=5)
             
         with gr.Column():
-            gr.Markdown("### Instruct Model Response")
+            gr.Markdown("### Instruct Model Response") 
             instruct_output = gr.Textbox(label="Instruct Model (SmolLM2-135M-instruct)", lines=5)
     
     submit_btn = gr.Button("Generate Responses")
@@ -122,4 +119,4 @@ with gr.Blocks() as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0")
+    demo.launch()
