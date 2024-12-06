@@ -91,7 +91,7 @@ with gr.Blocks() as demo:
             temperature = gr.Slider(
                 minimum=0.1, 
                 maximum=2.0, 
-                value=0.7, 
+                value=0.5, 
                 label="Temperature"
             )
             max_length = gr.Slider(
@@ -108,7 +108,7 @@ with gr.Blocks() as demo:
             base_output = gr.Textbox(label="Base Model (SmolLM2-135M)", lines=5)
             
         with gr.Column():
-            gr.Markdown("### Fine-tuned Model Response") 
+            gr.Markdown("### Bootleg Instruct Model Response") 
             instruct_output = gr.Textbox(label="Fine-tuned Model", lines=5)
     
     submit_btn = gr.Button("Generate Responses")
