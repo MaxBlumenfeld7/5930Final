@@ -4,13 +4,18 @@ import gradio as gr
 
 # Load base model from HuggingFace and instruction model from local directory
 base_model_id = "HuggingFaceTB/SmolLM2-135M"
-instruct_model_path = "5930Final/Fine-tuning/smollm2_finetuned/05"  # Updated path
+# instruct_model_path = "5930Final/Fine-tuning/smollm2_finetuned/05"  # Updated path
+instruct_model_path = "MaxBlumenfeld/smollm2-135m-bootleg-instruct"
+
 
 base_tokenizer = AutoTokenizer.from_pretrained(base_model_id)
-instruct_tokenizer = AutoTokenizer.from_pretrained(instruct_model_path, local_files_only=True)
+# instruct_tokenizer = AutoTokenizer.from_pretrained(instruct_model_path, local_files_only=True)
+instruct_tokenizer = AutoTokenizer.from_pretrained(instruct_model_path)
 
 base_model = AutoModelForCausalLM.from_pretrained(base_model_id)
-instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_path, local_files_only=True)
+# instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_path, local_files_only=True)
+instruct_model = AutoModelForCausalLM.from_pretrained(instruct_model_path)
+
 
 def generate_response(model, tokenizer, message, temperature=0.5, max_length=200, system_prompt="", is_instruct=False):
     # Prepare input based on model type
