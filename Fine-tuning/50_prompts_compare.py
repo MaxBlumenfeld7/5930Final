@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 # Load models
 base_model_id = "HuggingFaceTB/SmolLM2-135M"
-instruct_model_path = "5930Final/Fine-tuning/smollm2_finetuned/05"
+instruct_model_path = "5930Final/Fine-tuning/smollm2_finetuned/07"
 
 base_tokenizer = AutoTokenizer.from_pretrained(base_model_id)
 instruct_tokenizer = AutoTokenizer.from_pretrained(instruct_model_path, local_files_only=True)
