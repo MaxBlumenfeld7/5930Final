@@ -1,4 +1,4 @@
-#Runs 50 prompts on each model and saves the results
+#Runs 50 prompts on each model 10x and saves the results
 
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
