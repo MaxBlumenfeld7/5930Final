@@ -1,4 +1,6 @@
 #Runs 50 prompts on each model 10x and saves the results
+#results then scored using chatgpt 4o as judge model
+
 
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
