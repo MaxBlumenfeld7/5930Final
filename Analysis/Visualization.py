@@ -1,3 +1,4 @@
+# Script for visualizing results from excel file
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
