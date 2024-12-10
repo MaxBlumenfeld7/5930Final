@@ -3,8 +3,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load your fine-tuned model and tokenizer
-# model_path = "5930Final/Fine-tuning/smollm2_finetuned/07"
-model_path = 'Big_models/07'
+# model_path = "5930Final/Fine-tuning/smollm2_finetuned/07" old path which was actually used
+model_path = 'Big_models/07' # new path which reflects current locations of things. big_models is outside the repo beacause its files are too big
 model = AutoModelForCausalLM.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 

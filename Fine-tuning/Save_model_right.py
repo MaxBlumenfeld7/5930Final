@@ -4,7 +4,8 @@ from peft import PeftModel
 # Paths
 base_model_id = "HuggingFaceTB/SmolLM2-135M"  # Base model
 lora_model_path = "5930Final/Fine-tuning/smollm2_finetuned/05"  # Fine-tuned LoRA model
-output_dir = "5930Final/Fine-tuning/smollm2_finetuned/07"  # Directory to save the merged model
+# output_dir = "5930Final/Fine-tuning/smollm2_finetuned/07"  # old path which was actually used
+output_dir = 'Big_models/07'## new path which reflects current locations of files
 
 # Step 1: Load the base model
 print("Loading the base model...")
