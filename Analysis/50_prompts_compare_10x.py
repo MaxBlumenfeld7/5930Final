@@ -1,3 +1,5 @@
+#Runs 50 prompts on each model and saves the results
+
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import json
